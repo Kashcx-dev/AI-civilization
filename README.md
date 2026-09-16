@@ -15,13 +15,3 @@ The brain of the simulation, located in `core_engine/`.
 
 ### 2. Frontend Visual Interface (Coming Soon)
 A web interface to visually observe the agents, their stats, and their real-time thoughts as they interact in the world.
-
-## Progress Checklist
-- [x] Define core concepts and mechanics (`idea_flow.md`)
-- [x] Setup SQLite Database for Agents, Memories, and Relationships
-- [x] Implement LangGraph cognitive loop with Ollama
-- [x] Build `GameMaster` simulation loop
-- [x] Setup WebSocket server to stream simulation data
-- [ ] Create Frontend web application
-- [ ] Implement `takePossession` and `harm` actions for agents
-- [ ] Render simulation visually
