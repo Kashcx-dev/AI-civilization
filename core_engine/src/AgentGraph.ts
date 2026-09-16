@@ -1,8 +1,8 @@
 import { StateGraph, Annotation } from '@langchain/langgraph';
-import { Ollama } from '@langchain/community/llms/ollama';
+import { Ollama } from '@langchain/ollama';
 import db from './database';
 
-// 1. Define the Graph State
+// Define the Graph State
 export const AgentState = Annotation.Root({
   agentId: Annotation<string>(),
   currentState: Annotation<any>(),
@@ -10,13 +10,13 @@ export const AgentState = Annotation.Root({
   decision: Annotation<any>(),
 });
 
-// Initialize the Ollama model (Make sure Llama 3 is running via Ollama locally)
+// Initialize the Ollama model
 const llm = new Ollama({
   baseUrl: "http://localhost:11434", // Default Ollama port
   model: "llama3", // or "phi3" for faster local inferences
 });
 
-// 2. Node: Fetch State
+// Node: Fetch State
 async function fetchState(state: typeof AgentState.State) {
   const agentId = state.agentId;
   const agent = db.prepare('SELECT * FROM agents WHERE id = ?').get(agentId);
@@ -31,7 +31,7 @@ async function fetchMemories(state: typeof AgentState.State) {
   return { recentMemories: memories };
 }
 
-// 4. Node: Think (LLM call)
+// Node: Think (LLM call)
 async function think(state: typeof AgentState.State) {
   const prompt = `
     You are an autonomous AI Agent in a simulation.
@@ -52,7 +52,7 @@ async function think(state: typeof AgentState.State) {
   }
 }
 
-// 5. Node: Act (Execute and save memory)
+// Node: Act (Execute and save memory)
 async function act(state: typeof AgentState.State) {
   try {
     const decision = typeof state.decision === 'string' ? JSON.parse(state.decision) : state.decision;

@@ -1,5 +1,6 @@
 import { initializeDatabase } from './database';
 import { GameMaster } from './GameMaster';
+import { SimulationServer } from './server';
 import db from './database';
 
 // 1. Initialize the SQLite Database
@@ -15,8 +16,11 @@ if (agentCount.count === 0) {
     console.log("Seeded Alice and Bob.");
 }
 
-// 3. Start the Simulation
-const gm = new GameMaster();
+// 3. Start the WebSocket Server
+const wss = new SimulationServer(8080);
+
+// 4. Start the Simulation
+const gm = new GameMaster(wss);
 gm.start();
 
 // Handle graceful shutdown

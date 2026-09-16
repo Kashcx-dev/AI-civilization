@@ -1,9 +1,15 @@
 import db from './database';
 import { agentApp } from './AgentGraph';
+import { SimulationServer } from './server';
 
 export class GameMaster {
   private tickRateMs = 5000; // 5 seconds per tick
   private isRunning = false;
+  private server: SimulationServer;
+
+  constructor(server: SimulationServer) {
+    this.server = server;
+  }
 
   public async start() {
     this.isRunning = true;
@@ -38,6 +44,9 @@ export class GameMaster {
       await Promise.all(agentPromises);
       
       console.log(`--- Tick End ---`);
+      
+      // Broadcast state to visual interface clients
+      this.server.broadcastState();
       
       // Wait for next tick
       await new Promise(resolve => setTimeout(resolve, this.tickRateMs));
