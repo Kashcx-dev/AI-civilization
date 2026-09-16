@@ -5,7 +5,7 @@ Creating a simulated civilization populated with as many AI agents as the hardwa
 
 ## Agent Drives & Basic Instincts
 Agents start with no prior knowledge of the world, equipped only with fundamental drives:
-- **Survival**: The will to live and fulfill basic physiological needs (Food, Water).
+- **Survival**: The will to live and fulfill basic physiological needs (e.g., Food, Water).
 - **Reproduction**: A drive to increase their heredity and pass on their traits.
 - **Secondary Aspirations**: Pursuing abstract goals like "Fame" or status, if they discover them.
 
@@ -29,22 +29,22 @@ A special psychological mechanic designed to test the civilization's sustainabil
 
 ## Architecture & Visuals
 - **Backend & Frontend Separation**: Designed for robust simulation and rendering.
-- **Frontend visuals**: Built with a framework like React to provide great, dynamic visuals.
+- **Frontend Visuals**: Built with a framework like React to provide great, dynamic visuals.
 - **Agent Representation**: Agents will be visually represented as simple blocks, making it easy to observe their movements, interactions, and communities at scale.
 
-## Activities
-- **Agent's Activities**: Agents will have a list of activities they can perform, and they will choose activities based on their needs and desires.
-    - **Basic Activities**: Eating, drinking, sleeping, etc.
-    - **Social Activities**: Talking, Bnoding
-    - **Agressive Activities**: Harming, Sabotaging, Stealing.
-    - **Controlling Activities**: Forming alliances, Dicatorships, controlling sources
-    - **Definition of survivibility**- Agent survivibility will be decided by environment
+## Agent Activities
+Agents will have a list of activities they can perform, choosing based on their current needs and desires:
+- **Basic Activities**: Eating, drinking, sleeping.
+- **Social Activities**: Talking, bonding, socializing.
+- **Aggressive Activities**: Harming, sabotaging, stealing.
+- **Controlling Activities**: Forming alliances, establishing dictatorships, controlling resources.
+- **Survivability**: An agent's overall survivability is determined dynamically by how well they manage these activities within the environment.
 
-**Environment Interractives**
-    - **Resource Generating**: Generating food, water, etc.
-    - **Discovery**: Discovering new resources, areas, etc.
-    - **Building**: Auto generate world (proceeding to a 'Mincraft like' world generating simulation)
-    - **Weather Conditions**: Massively affecting the moods and health and survivibility of Agents.
+## Environment Interactives
+- **Resource Generation**: Spawning food, water, and other materials.
+- **Discovery**: Finding new resources, exploring uncharted areas.
+- **Building**: Procedural auto-generation of the world (progressing towards a 'Minecraft-like' simulation).
+- **Weather Conditions**: Dynamic weather massively affecting the moods, health, and survivability of the agents.
 
 ---
 *Note: This document is a conceptual guide and rulebook for understanding the mechanics of the AI Civilization simulation.*
