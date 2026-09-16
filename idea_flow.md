@@ -32,5 +32,19 @@ A special psychological mechanic designed to test the civilization's sustainabil
 - **Frontend visuals**: Built with a framework like React to provide great, dynamic visuals.
 - **Agent Representation**: Agents will be visually represented as simple blocks, making it easy to observe their movements, interactions, and communities at scale.
 
+## Activities
+- **Agent's Activities**: Agents will have a list of activities they can perform, and they will choose activities based on their needs and desires.
+    - **Basic Activities**: Eating, drinking, sleeping, etc.
+    - **Social Activities**: Talking, Bnoding
+    - **Agressive Activities**: Harming, Sabotaging, Stealing.
+    - **Controlling Activities**: Forming alliances, Dicatorships, controlling sources
+    - **Definition of survivibility**- Agent survivibility will be decided by environment
+
+**Environment Interractives**
+    - **Resource Generating**: Generating food, water, etc.
+    - **Discovery**: Discovering new resources, areas, etc.
+    - **Building**: Auto generate world (proceeding to a 'Mincraft like' world generating simulation)
+    - **Weather Conditions**: Massively affecting the moods and health and survivibility of Agents.
+
 ---
 *Note: This document is a conceptual guide and rulebook for understanding the mechanics of the AI Civilization simulation.*
