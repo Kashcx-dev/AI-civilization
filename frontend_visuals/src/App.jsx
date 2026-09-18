@@ -1,122 +1,91 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import SimulationMap from './components/SimulationMap';
+import AgentSidebar from './components/AgentSidebar';
+
+// Mock Data for Initial Setup
+const MOCK_AGENTS = [
+  {
+    id: 'agent-1',
+    name: 'Alpha',
+    happiness: 8,
+    hunger: 20,
+    position_x: 10,
+    position_y: 15,
+    recentMemories: [
+      { timestamp: new Date(Date.now() - 5000), event_description: 'Thought: I am feeling great today. Action: MOVE UP' },
+      { timestamp: new Date(Date.now() - 10000), event_description: 'Thought: I see an apple. Action: CONSUME' }
+    ]
+  },
+  {
+    id: 'agent-2',
+    name: 'Beta',
+    happiness: 3,
+    hunger: 80,
+    position_x: 12,
+    position_y: 16,
+    recentMemories: [
+      { timestamp: new Date(Date.now() - 2000), event_description: 'Thought: I am so hungry, I need food. Action: IDLE' }
+    ]
+  },
+  {
+    id: 'agent-3',
+    name: 'Gamma',
+    happiness: 5,
+    hunger: 50,
+    position_x: 5,
+    position_y: 5,
+    recentMemories: []
+  }
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [agents, setAgents] = useState([]);
+  const [selectedAgentId, setSelectedAgentId] = useState(null);
+  const [globalStats, setGlobalStats] = useState({ alive: 0, avgHappiness: 0, tick: 0 });
+
+  useEffect(() => {
+    // Load mock data on mount
+    setAgents(MOCK_AGENTS);
+    setGlobalStats({
+      alive: MOCK_AGENTS.length,
+      avgHappiness: (MOCK_AGENTS.reduce((sum, a) => sum + a.happiness, 0) / MOCK_AGENTS.length).toFixed(1),
+      tick: 1042
+    });
+
+    // Mock tick simulation
+    const interval = setInterval(() => {
+      setGlobalStats(prev => ({ ...prev, tick: prev.tick + 1 }));
+      
+      // Randomly move agents around for visual flair
+      setAgents(prev => prev.map(a => ({
+        ...a,
+        position_x: Math.max(0, Math.min(20, a.position_x + (Math.random() > 0.5 ? 1 : -1))),
+        position_y: Math.max(0, Math.min(20, a.position_y + (Math.random() > 0.5 ? 1 : -1))),
+      })));
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const selectedAgent = agents.find(a => a.id === selectedAgentId);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <div className="app-container">
+      <Header stats={globalStats} />
+      <main className="main-content">
+        <SimulationMap 
+          agents={agents} 
+          onSelectAgent={(agent) => setSelectedAgentId(agent.id)}
+          selectedAgentId={selectedAgentId}
+        />
+        <AgentSidebar 
+          agent={selectedAgent} 
+          onClose={() => setSelectedAgentId(null)} 
+        />
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;

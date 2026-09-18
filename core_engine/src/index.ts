@@ -27,6 +27,7 @@ gm.start();
 process.on('SIGINT', () => {
     console.log("Shutting down...");
     gm.stop();
+    wss.close();
     db.close();
     process.exit(0);
 });
