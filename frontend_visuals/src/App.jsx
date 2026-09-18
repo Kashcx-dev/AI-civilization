@@ -10,6 +10,7 @@ const MOCK_AGENTS = [
     name: 'Alpha',
     happiness: 8,
     hunger: 20,
+    objective: 'Explore Northern Grid',
     position_x: 10,
     position_y: 15,
     recentMemories: [
@@ -22,6 +23,7 @@ const MOCK_AGENTS = [
     name: 'Beta',
     happiness: 3,
     hunger: 80,
+    objective: 'Find Food Urgently',
     position_x: 12,
     position_y: 16,
     recentMemories: [
@@ -33,6 +35,7 @@ const MOCK_AGENTS = [
     name: 'Gamma',
     happiness: 5,
     hunger: 50,
+    objective: 'Socialize',
     position_x: 5,
     position_y: 5,
     recentMemories: []

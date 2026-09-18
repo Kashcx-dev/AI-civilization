@@ -63,3 +63,57 @@
   0% { transform: scale(0.8); opacity: 0.8; }
   100% { transform: scale(1.5); opacity: 0; }
 }
+
+.agent-tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 160px;
+  padding: 10px 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 100;
+  border-radius: 8px;
+}
+
+.agent-token:hover .agent-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.agent-tooltip h4 {
+  margin: 0 0 8px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
+}
+
+.telemetry-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  margin-bottom: 4px;
+}
+
+.telemetry-row:last-child {
+  margin-bottom: 0;
+}
+
+.telemetry-row .label {
+  color: var(--text-secondary);
+}
+
+.telemetry-row .value {
+  font-weight: 600;
+}
+
+.text-accent {
+  color: var(--accent-cyan);
+}

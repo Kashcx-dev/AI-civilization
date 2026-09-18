@@ -30,10 +30,25 @@ export default function SimulationMap({ agents, onSelectAgent, selectedAgentId }
                 '--agent-color': getAgentColor(agent.happiness)
               }}
               onClick={() => onSelectAgent(agent)}
-              title={agent.name}
             >
               <div className="agent-core"></div>
               {isSelected && <div className="agent-ring"></div>}
+              
+              <div className="agent-tooltip glass-panel">
+                <h4>{agent.name}</h4>
+                <div className="telemetry-row">
+                  <span className="label">Objective:</span>
+                  <span className="value text-accent">{agent.objective || 'Survive'}</span>
+                </div>
+                <div className="telemetry-row">
+                  <span className="label">Happiness:</span>
+                  <span className="value" style={{ color: getAgentColor(agent.happiness) }}>{agent.happiness}/10</span>
+                </div>
+                <div className="telemetry-row">
+                  <span className="label">Hunger:</span>
+                  <span className="value" style={{ color: 'var(--accent-danger)' }}>{agent.hunger}/100</span>
+                </div>
+              </div>
             </div>
           );
         })}
